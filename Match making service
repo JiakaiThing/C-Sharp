@@ -1,0 +1,70 @@
+//Program.cs
+using System;
+
+namespace DatingProfile
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      Profile sam = new Profile("Sam Drakkila", 30, "New York", "USA", "he/him");
+      sam.SetHobbies(new string[] {"Playing soccer","Reading","Sleeping","Eating","Go karting"});
+      Console.WriteLine(sam.ViewProfile());
+    }
+  }
+}
+
+//Profile.cs
+using System;
+
+namespace DatingProfile
+{ 
+  class Profile
+  {
+    private string name;
+    private int age;
+    private string city;
+    private string country;
+    private string pronouns;
+    private string[] hobbies;
+
+    //addign profile information in a constructor, have default values if user doesn't input city, country or pronouns
+    public Profile(string name, int age, string city = "n/a", string country = "n/a", string pronouns = "they/them")
+    {
+      this.name = name;
+      this.age = age;
+      this.city = city;
+      this.country = country;
+      this.pronouns = pronouns;
+      this.hobbies = new string[0];
+    }
+
+    //method
+    public string ViewProfile()
+    {
+      string bio = $"Name: {name}\nAge: {age}\nCity: {city}\nCountry: {country}\nPronouns: {pronouns}";
+
+      //will only print '\nHobbies:\n' and attempt to loop through hobby in hobbies array if the this.hobbies.length is greater than 0
+      if(this.hobbies.Length > 0)
+      {
+        //hobbies array to be printed out from main
+        bio += "\nHobbies:\n";
+        //looping through hobbies array
+        foreach(string hobby in hobbies)
+        {
+          bio += $"- {hobby}\n";
+        }
+      }
+      return bio;
+    }
+
+    public void SetHobbies(string[] hobbies)
+    {
+      this.hobbies = hobbies;
+    }
+
+  }
+
+  
+}
+
